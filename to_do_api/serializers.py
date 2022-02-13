@@ -5,7 +5,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
     """Serializes the user profile"""
     class Meta:
         model = UserProfile
-        fields = ('id', 'email', 'first_name', 'last_name', 'password')
+        fields = ('id', 'email', 'first_name', 'last_name', 'tasks', 'password')
+        depth = 1
         extra_kwargs = {
             'password': {
                 'write_only': True, # users wont be able to GET the password

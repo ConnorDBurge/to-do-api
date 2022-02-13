@@ -38,6 +38,9 @@ class UserToDoViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,) # tuple
     queryset = ToDoItem.objects.all()
     permission_classes = (UpdateOwnToDoItem, IsAuthenticated,) # tuple
+    # api/to-do/?search=<TERM>
+    filter_backends = (filters.SearchFilter,) # tuple
+    search_fields = ('task',) # tuple
     
     def perform_create(self, serializer):
         """Sets the user profile to the logged in user"""
