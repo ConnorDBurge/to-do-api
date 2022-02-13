@@ -56,10 +56,11 @@ class ToDoItem(models.Model):
     """User To-Do item"""
     user_profile = models.ForeignKey( # User that creates this item
         settings.AUTH_USER_MODEL, # set in to_do_proj/settings.py
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='tasks'
     )
     task = models.CharField(max_length=255)
     created_on = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.status_text
+        return self.task
