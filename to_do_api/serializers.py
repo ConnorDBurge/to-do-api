@@ -14,6 +14,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
                 }
             }
         }
+        
     def create(self, validated_data):
         user = UserProfile.objects.create_user(
             email = validated_data['email'],
@@ -30,3 +31,14 @@ class UserProfileSerializer(serializers.ModelSerializer):
             instance.set_password(password)
     
         return super().update(instance, validated_data)
+    
+class UserToDoItemSerializer(serializers.ModelSerializer):
+    """Serializer for User to-do items"""
+    class Meta:
+        model = ToDoItem
+        fields = ('id', 'user_profile', 'task', 'created_on')
+        extra_kwargs = {
+            'user_profile': {
+                'read_only': True
+            }
+        }
